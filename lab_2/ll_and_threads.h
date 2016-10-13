@@ -22,6 +22,8 @@ typedef struct node{
 
 Node* create_list(int contents);
 void add_to_end(int contents, Node *list);
+void delete_node(Node **head, Node *node);
+void print(Node *node);
 
 
 

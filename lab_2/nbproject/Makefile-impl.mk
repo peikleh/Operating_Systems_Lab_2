@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=threads
+PROJECTNAME=lab_2
 
 # Active Configuration
 DEFAULTCONF=Debug

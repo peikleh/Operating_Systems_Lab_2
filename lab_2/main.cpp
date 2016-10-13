@@ -32,19 +32,52 @@ void add_to_end(int contents, Node *list) {
     while (temp->next != NULL) {
         temp = temp->next;
     }
+    
     temp->next = new_node;
     new_node->prev = temp;
+}
+
+void delete_node(Node **head, Node *node){
+    if(head == NULL || node == NULL){
+        return;
+    }
+    
+    if(*head == node){
+        *head = node->next;
+    }
+    
+    if (node->next != NULL){
+        node->next->prev = node->prev;
+    }
+    
+    if(node->prev != NULL){
+        node->prev->next = node->next;
+    }
+
+    free(node);
+    
+    
+}
+
+void print(Node *node){
+    Node* temp = node;
+    while (temp != NULL){
+        printf("%d ", temp->contents);
+        temp = temp->next;
+    }
+    printf("\n");
+    
 }
 
 int main(int argc, char** argv) {
     Node *head = NULL;
     head = create_list(5);
     add_to_end(10, head);
+    add_to_end(15, head);
 
-    head = head->next;
-
-    head = head->prev;
-    //printf("%d\n", head->contents);
+    print(head);
+    delete_node(&head, head->next);
+    print(head);
 
 }
 
