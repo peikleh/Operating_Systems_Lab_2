@@ -10,18 +10,19 @@
 #include <stdio.h>
 #include <pthread.h>
 #include <stdlib.h>
-/*#################################################################
-Function declarations. Should be in a header file but doing it here
-keeps everything in one file.
+/*####################keeps everything in one file.
+#############################################
+ * Linked List Functions
 #################################################################*/
-typedef struct linked_list{
+typedef struct node{
     int contents;
-    struct linked_list *next;
-    struct linked_list *prev;
-} List;
+    struct node *next;
+    struct node *prev;
+} Node;
 
-List* create_list(int contents);
-void add_to_end(int contents, List *list);
+Node* create_list(int contents);
+void add_to_end(int contents, Node *list);
+void delete(Node *node);
 
 
 
