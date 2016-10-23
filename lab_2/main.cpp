@@ -14,18 +14,20 @@
 Linked Node Funtions
 #######################*/
 
-Node* create_list(int contents) {
-    Node *start = (Node*) malloc(sizeof (Node));
+L_list* create_list(int contents) {
+    Node* start = (Node*) malloc(sizeof (Node));
     start->contents = contents;
     start->prev = NULL;
     start->next = NULL;
-    return start;
+    L_list* l_list = (L_list*) malloc(sizeof(L_list));
+    l_list->head = start;
+    return l_list;
 }
 
 
-void add_to_end(int contents, Node *list) {
-    Node *new_node = (Node*) malloc(sizeof (Node));
-    Node *temp = list;
+void add_to_end(int contents, L_list *list) {
+    Node* new_node = (Node*) malloc(sizeof (Node));
+    Node* temp = list->head;
     new_node->contents = contents;
     new_node->next = NULL;
 
@@ -37,22 +39,26 @@ void add_to_end(int contents, Node *list) {
     new_node->prev = temp;
 }
 
-void delete_node(Node **head, Node *node){
-    if(head == NULL || node == NULL){
+void delete_node(L_list* list, Node* node){
+    
+            
+    if(list->head == NULL || node == NULL){
         return;
     }
     
-    if(*head == node){
-        *head = node->next;
-    }
-    
-    if (node->next != NULL){
+    if(list->head == node){
+        list->head = node->next;
+        list->head->prev = NULL;
+        
+    }else if(node->next == NULL){
+        
+        node->prev-> next = NULL;
+    }else{
         node->next->prev = node->prev;
-    }
-    
-    if(node->prev != NULL){
         node->prev->next = node->next;
     }
+    
+    
 
     free(node);
     
@@ -70,15 +76,18 @@ void print(Node *node){
 }
 
 int main(int argc, char** argv) {
-    Node *head = NULL;
-    head = create_list(5);
-    add_to_end(10, head);
-    add_to_end(15, head);
+    L_list* list = create_list(5);
+    add_to_end(10, list);
+    add_to_end(15, list);
 
-    print(head);
-    delete_node(&head, head->next);
-    print(head);
-
+    print(list->head);
+    delete_node(list, list->head->next);
+    print(list->head);
+    add_to_end(5, list);
+    print(list->head);
+     
+    delete_node(list, list->head->next->next);
+    print(list->head);
 }
 
 

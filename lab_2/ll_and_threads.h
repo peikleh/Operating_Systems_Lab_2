@@ -20,10 +20,16 @@ typedef struct node{
     struct node *prev;
 } Node;
 
-Node* create_list(int contents);
-void add_to_end(int contents, Node *list);
-void delete_node(Node **head, Node *node);
-void print(Node *node);
+typedef struct L_list{
+    Node* head;
+    pthread_mutex_t mutex;
+
+ }L_list;
+
+L_list* create_list(int contents);
+void add_to_end(int contents, Node* list);
+void delete_node(L_list* list, Node* node);
+void print(Node* node);
 
 
 
