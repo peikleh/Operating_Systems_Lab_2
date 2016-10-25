@@ -10,10 +10,13 @@
 #include <stdio.h>
 #include <pthread.h>
 #include <stdlib.h>
+#include <random>
+#include <unistd.h>
 /*####################keeps everything in one file.
 #############################################
  * Linked List Functions
 #################################################################*/
+
 typedef struct node{
     int contents;
     struct node *next;
@@ -27,9 +30,14 @@ typedef struct L_list{
  }L_list;
 
 L_list* create_list(int contents);
-void add_to_end(int contents, Node* list);
+void add_to_end(int contents, L_list* list);
 void delete_node(L_list* list, Node* node);
 void print(Node* node);
+int size_list( L_list *list);
+void* producer_1(void *arg);
+void* producer_2(void *arg);
+void* consumer_2(void *arg);
+void* consumer_1(void *arg);
 
 
 
